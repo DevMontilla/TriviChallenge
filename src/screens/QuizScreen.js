@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import {Center, Heading, Text} from 'native-base';
 import WhiteBox from '../components/Background/WhiteBox';
@@ -10,14 +10,20 @@ import ResponseBox from '../components/ResponseBox';
 import {timeInMinutes} from '../utils/timeInMinutes';
 import useQuestionnaire from '../hooks/useQuestionnaire';
 import {useNavigation} from '@react-navigation/core';
+import { useTranslation } from 'react-i18next';
 
 const QuizScreen = () => {
   const navigator = useNavigation();
+  const {t, i18n} = useTranslation()
   const [index, setIndex] = useState(0);
   const {totalQuestions, infoLevel, setResults, results} = useQuestionnaire();
   const quot = /&quot;|&#039;/gi;
   const ampersand = /&amp;/gi;
   const umlaut = /&Uuml;/gi;
+
+  useEffect(()=>{
+    i18n.changeLanguage('es-AR')
+  }, [])
 
   const renderTime = ({remainingTime}) => {
     if (remainingTime === 0) {
@@ -109,7 +115,7 @@ const QuizScreen = () => {
                   : 'Final'}
               </Heading>
               <CategoryIndicator
-                categoryName={`${totalQuestions[index]?.category}`}
+                categoryName={t(`${totalQuestions[index]?.category}`)}
                 backgroundColor={'green'}
               />
             </View>

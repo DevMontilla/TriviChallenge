@@ -14,6 +14,7 @@ if (__DEV__) {
 
 import React from 'react';
 import {NativeBaseProvider} from 'native-base';
+import './i18n'
 import {NavigationContainer} from '@react-navigation/native';
 import Navigator from './src/navigation/Navigator';
 import {QuestionnaireProvider} from './src/context/QuestionnaireContext';
